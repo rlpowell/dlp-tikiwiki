@@ -1,0 +1,8 @@
+MAILTO=webmaster@davidleepowell.com
+
+# Rebuild images every once in a while so we don't have surprises after a reboot of the host
+18 */5 * * * <%= maindir %>/rebuild_images.sh
+
+# The tikiwiki docker image has a VOLUME line that makes everything
+# terrible, so we do this
+18 2 * * *   /usr/local/bin/podman volume prune -f

@@ -1,0 +1,26 @@
+<%= "\n"*30 %>
+<%= "# YOU ARE IN THE WRONG PLACE" %>
+<%= "# YOU ARE IN THE WRONG PLACE use the ERB file" %>
+<%= "# YOU ARE IN THE WRONG PLACE" %>
+
+# https://hub.docker.com/_/mariadb
+FROM mariadb:10.5
+
+RUN usermod -u <%= userid %> mysql
+RUN find / -xdev -user 999 -print0 | xargs -0 chown mysql
+RUN find / -xdev -user 999 -ls
+RUN groupmod -g <%= groupid %> mysql
+RUN find / -xdev -group 999 -print0 | xargs -0 chgrp mysql
+RUN find / -xdev -group 999 -ls
+
+# # Stop having to type the password all the time
+# COPY misc/pgpass /root/.pgpass
+# COPY misc/pgpass /.pgpass
+# COPY misc/pgpass /var/lib/postgresql/.pgpass
+# RUN chmod 400 /root/.pgpass /.pgpass /var/lib/postgresql/.pgpass
+# 
+# # Backups
+# COPY misc/pgbackup.sh /usr/local/bin/pgbackup.sh
+# RUN chmod 755 /usr/local/bin/pgbackup.sh
+
+USER mysql
