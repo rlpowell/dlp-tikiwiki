@@ -1,12 +1,22 @@
 #!/bin/bash
 
-#********************
-# MySQL cleanup
-#********************
-
 exec 2>&1
 set -e
 set -x
+
+#********************
+# Tiki-Specific Cleanup
+#********************
+
+mysql tiki_dlp -e 'delete from sessions where expiry < UNIX_TIMESTAMP();'
+
+mysql tiki_dlp -e 'truncate tiki_stats;'
+
+mysql tiki_dlp -e 'delete from tiki_actionlog where lastmodif < UNIX_TIMESTAMP(CURRENT_DATE() - INTERVAL 6 MONTH);'
+
+#********************
+# MySQL cleanup
+#********************
 
 # Only do the big jobs once a month
 if [ "$(date +%-d)" -eq 1 ]
