@@ -13,14 +13,11 @@ RUN groupmod -g <%= groupid %> mysql
 RUN find / -xdev -group 999 -print0 | xargs -0 chgrp mysql
 RUN find / -xdev -group 999 -ls
 
-# # Stop having to type the password all the time
-# COPY misc/pgpass /root/.pgpass
-# COPY misc/pgpass /.pgpass
-# COPY misc/pgpass /var/lib/postgresql/.pgpass
-# RUN chmod 400 /root/.pgpass /.pgpass /var/lib/postgresql/.pgpass
-# 
-# # Backups
-# COPY misc/pgbackup.sh /usr/local/bin/pgbackup.sh
-# RUN chmod 755 /usr/local/bin/pgbackup.sh
+# Backups
+RUN mkdir -p /home/mysql/
+RUN chown mysql:mysql /home/mysql/
+COPY misc/my.cnf /home/mysql/.my.cnf
+COPY misc/mysql_backup.sh /usr/local/bin/mysql_backup.sh
+RUN chmod 755 /usr/local/bin/mysql_backup.sh
 
 USER mysql

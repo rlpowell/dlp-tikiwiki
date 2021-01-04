@@ -6,3 +6,6 @@ MAILTO=webmaster@davidleepowell.com
 # The tikiwiki docker image has a VOLUME line that makes everything
 # terrible, so we do this
 18 2 * * *   /usr/local/bin/podman volume prune -f
+
+# Database backups; they end up in containers/db/data/backups/
+3 3 * * * <%= maindir %>/cron/cron-run-inside.sh db /usr/local/bin/mysql_backup.sh
