@@ -1,2 +1,2 @@
-service=dlp-tikiwiki
+bundle=dlp-tikiwiki
 pod_args='-p 19480:80'
