@@ -4,7 +4,7 @@
 <%= "# YOU ARE IN THE WRONG PLACE" %>
 
 # https://hub.docker.com/_/mariadb
-FROM mariadb:10.5
+FROM docker.io/library/mariadb:10.5
 
 RUN usermod -u <%= userid %> mysql
 RUN find / -xdev -user 999 -print0 | xargs -0 chown mysql

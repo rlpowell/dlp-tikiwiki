@@ -3,7 +3,7 @@
 <%= "# YOU ARE IN THE WRONG PLACE use the ERB file" %>
 <%= "# YOU ARE IN THE WRONG PLACE" %>
 
-FROM tikiwiki/tikiwiki:21.x
+FROM docker.io/tikiwiki/tikiwiki:21.x
 
 RUN chown -R www-data:www-data /var/www/html/img/wiki/ /var/www/html/img/wiki_up/  /var/www/html/modules/cache/ /var/www/html/temp/
 RUN mkdir /var/www/html/img/dlp/
